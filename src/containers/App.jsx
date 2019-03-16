@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { display, fetchData } from "../actions";
+import { fetchData } from "../actions";
 import Card from "../components/card";
+import Loading from "../components/loading";
+
 import "./index.scss";
 
 export class App extends Component {
-    state = {
-        users: [1, 3, 3]
-    };
+    componentWillMount() {
+        this.props.get();
+    }
     render() {
-        const { users } = this.state;
+        const { loading, users } = this.props.store;
         return (
             <div className="main">
-                {users.map((user, index) => (
-                    <Card key={index} />
-                ))}
+                {loading ? (
+                    <Loading />
+                ) : (
+                    users.map(user => <Card key={user.id} {...user} />)
+                )}
             </div>
         );
     }
@@ -28,7 +32,6 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        mostrar: () => dispatch(display()),
         get: () => dispatch(fetchData())
     };
 }

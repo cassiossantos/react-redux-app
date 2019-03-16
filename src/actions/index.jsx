@@ -1,34 +1,18 @@
-export const MOSTRAR = "MOSTRAR";
-export const LOADING = "LOADING";
 export const RECEIVE_DATA = "RECEIVE_DATA";
 
-export function display() {
+export function receiveData(users) {
     return {
-        type: MOSTRAR
-    };
-}
-
-export function loading() {
-    return {
-        type: LOADING
-    };
-}
-
-export function receiveData() {
-    return {
-        type: RECEIVE_DATA
+        type: RECEIVE_DATA,
+        users: users
     };
 }
 
 export function fetchData() {
     return function(dispatch) {
-        dispatch(loading());
-
         fetch("https://jsonplaceholder.typicode.com/users")
-            .then(response => response.json())
+            .then(response => response.json(), error => console.log(error))
             .then(json => {
-                console.log(json);
-                dispatch(receiveData());
+                dispatch(receiveData(json));
             });
     };
 }

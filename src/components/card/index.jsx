@@ -3,10 +3,11 @@ import "./index.scss";
 
 export default class Card extends Component {
     render() {
+        const { email, name } = this.props;
         return (
             <div className="card">
-                <div className="name">Leanne Graham</div>
-                <div className="email">Sincere@april.biz</div>
+                <div className="name">{name}</div>
+                <div className="email">{email}</div>
             </div>
         );
     }
