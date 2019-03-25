@@ -1,4 +1,4 @@
-````
-React and Redux
-````
+
+### React and Redux
+
 Simple demonstration of React and Redux together.
